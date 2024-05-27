@@ -1,0 +1,15 @@
+{% extends "practiceapp/layouts/base.html" %}
+
+{% block title %}Stores{% endblock title %}
+
+{% block content %}
+    <form action="/add" method="post">
+        {% csrf_token %}
+        {% include "practiceapp/components/add_store.html" %}
+    </form>
+    <div class="">
+        {% for item in stores %}
+            {% include "practiceapp/components/store_item.html" %}
+        {% endfor %}
+    </div>
+{% endblock content %}

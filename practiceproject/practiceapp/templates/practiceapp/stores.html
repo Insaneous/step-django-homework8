@@ -1,0 +1,20 @@
+{% extends "practiceapp/layouts/base.html" %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block back %}
+    <a href="/">Назад</a>
+{% endblock back %}
+
+{% block content %}
+    <form action="/add_cat" method="post">
+        {% csrf_token %}
+        {% include "practiceapp/components/add_cat.html" %}
+    </form>
+    <div class="">
+        <h2>Категории в магазине {{ store.name }}</h2>
+        {% for item in categories %}
+            {% include "practiceapp/components/cat_item.html" %}
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+<div>
+    <form action="/edit_prod" method="post" id="form_{{ item.id }}">
+        {% csrf_token %}
+        <input type="hidden" value="{{ store.slug }}" name="store_slug">
+        <input type="hidden" value="{{ category.slug }}" name="cat_slug">
+        <input type="hidden" value="{{ item.id }}" name="product_id">
+        {{ item.id }}. 
+        <input type="text" value="{{ item.name }}" name="product_name" disabled> - 
+        <input type="number" value="{{ item.price }}" name="product_price" disabled>
+        <button type="button" onclick="editBtn()" id="edit_{{ item.id }}">Редактировать</button>
+        <button type="submit" id="save_{{ item.id }}" disabled>Сохранить</button>
+        <a href="/del_prod?prod_id={{ item.id }}&cat={{ category.slug }}&store={{ store.slug }}">Удалить</a>
+    </form>
+</div>

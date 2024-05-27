@@ -1,0 +1,34 @@
+{% extends "practiceapp/layouts/base.html" %}
+
+{% block title %}Products{% endblock title %}
+
+{% block back %}
+    <a href="/store/{{ store.slug }}">Назад</a>
+{% endblock back %}
+
+{% block content %}
+    <form action="/add_prod" method="post">
+        {% csrf_token %}
+        {% include "practiceapp/components/add_prod.html" %}
+    </form>
+    <div class="">
+        <h2>Продукты категории {{ category.name }} в магазине {{ store.name }}</h2>
+        {% for item in products %}
+            {% include "practiceapp/components/prod_item.html" %}
+        {% endfor %}
+    </div>
+    <script>
+        let editBtn = _ => {
+            let id = event.target.id.match(/\d+/)[0]
+            const input = document.querySelectorAll(`#form_${id} input`)
+            input.forEach(el => {
+                if (el.getAttribute('disabled') === '')
+                el.toggleAttribute('disabled')
+            })
+            const editBtn = document.querySelector(`#edit_${id}`)
+            const saveBtn = document.querySelector(`#save_${id}`)
+            editBtn.toggleAttribute('disabled')
+            saveBtn.toggleAttribute('disabled')
+        }
+    </script>
+{% endblock content %}
